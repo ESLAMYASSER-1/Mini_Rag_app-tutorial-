@@ -18,3 +18,18 @@ $ python3 -m venv <envName>
 ``` bash
 $ source <envName>/bin/activate
 ```
+
+## Initialization 
+
+### 1) Install Required Packages
+``` bash
+$ pip install -r requirements.txt
+```
+
+### 2) Setup the environment variables
+``` bash
+$ cp .env.example .env
+```
+- set your .env variables
+
+
