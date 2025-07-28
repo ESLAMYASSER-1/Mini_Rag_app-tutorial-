@@ -1,10 +1,20 @@
 from controllers import BaseController
 from models import ResponseSignal
 from fastapi import UploadFile
+import os 
+
 
 class ProjectController(BaseController):
     def __init__(self):
         super().__init__()
 
-    def CreateProjectFile(self):
-        pass
+        
+    def GetProjectPath(self, project_id:str):
+        project_dir = os.path.join(self.file_dir, project_id)
+        
+
+        if not os.path.exists(project_dir):
+            os.makedirs(project_dir)
+
+        return project_dir
+    
