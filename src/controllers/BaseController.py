@@ -8,7 +8,7 @@ class BaseController:
         self.APP_VERSION = os.getenv("APP_VERSION")
         self.FILE_ALLOWED_TYPES = os.getenv("FILE_ALLOWED_TYPES")
         self.FILE_MAXIMUM_SIZE = os.getenv("FILE_MAXIMUM_SIZE")
-        self.FILE_CHUNCK_SIZE = os.getenv("FILE_CHUNCK_SIZE")
+        self.FILE_CHUNK_SIZE = os.getenv("FILE_CHUNK_SIZE")
 
         self.base_dir = os.path.dirname(os.path.dirname(__file__))
         self.file_dir = os.path.join(self.base_dir, "assets/files")
