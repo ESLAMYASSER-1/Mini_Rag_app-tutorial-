@@ -32,9 +32,23 @@ $ cp .env.example .env
 ```
 - set your `.env` variables
 
+## Install Docker
+- Windows [here](https://docs.docker.com/desktop/setup/install/windows-install/)
+- Linux [here](https://docs.docker.com/desktop/setup/install/linux/)
+
+## Install MongoDB
+### Use docker to run mongo or install it locally
+1) Using Docker 
+- ```bash
+  $ docker compose -f /docker/docker-compose.yml up -d --build
+  ```
+2) Local Install 
+- Install Mongo From [here](https://www.mongodb.com/docs/manual/installation/)
 
 ## Run FastAPI Server 
 ``` bash 
 $ uvicorn main:app --reload --host 0.0.0.0 --port 5000
 ```
+
+
 

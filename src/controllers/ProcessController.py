@@ -19,7 +19,6 @@ class ProcessController(BaseController):
         file_ext = self.get_file_extension(file_id)
 
         if file_ext == ProcessingEnums.TXT.value:
-            print(self.project_path)
             return TextLoader(os.path.join(self.project_path,file_id), encoding="utf-8")
     
         if file_ext == ProcessingEnums.PDF.value:

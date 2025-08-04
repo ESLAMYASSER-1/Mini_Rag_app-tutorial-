@@ -7,3 +7,5 @@ pydantic==2.11.7
 langchain==0.3.27
 PyMuPDF==1.26.3
 langchain-community==0.3.27
+pymongo==4.13.2
+bson==0.5.10
