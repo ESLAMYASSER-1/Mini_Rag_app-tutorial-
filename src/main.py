@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from pkg_resources import yield_lines
 from routes import base,data
 import os
 from contextlib import asynccontextmanager
@@ -21,4 +20,4 @@ app = FastAPI(lifespan=lifespan)
 
 app.include_router(router= base.base_router)
 app.include_router(router=data.data_router)
- 
+

@@ -7,8 +7,19 @@ class DataChunk(BaseModel):
     chunk_text: str = Field(..., min_length=1)
     chunk_metadata: dict 
     chunck_order: int
-    chunk_object_id: ObjectId
+    chunk_project_id: ObjectId
 
+    @classmethod
+    def get_indexes(cls):
 
+        return [
+            {
+                "key":[
+                    ("chunk_project_id", 1)
+                ],
+                "name": "chunk_project_id_index_asc",
+                "unique": False
+            }
+        ]
     class Config:
         arbitrary_types_allowed = True

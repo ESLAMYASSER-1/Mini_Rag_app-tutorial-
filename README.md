@@ -32,6 +32,13 @@ $ cp .env.example .env
 ```
 - set your `.env` variables
 
+### 3) Setup Docker Environment Variables
+``` bash
+$cp ./docker/.env.example ./docker/.env
+$cd docker
+```
+- set your `.env` variables for docker
+
 ## Install Docker
 - Windows [here](https://docs.docker.com/desktop/setup/install/windows-install/)
 - Linux [here](https://docs.docker.com/desktop/setup/install/linux/)

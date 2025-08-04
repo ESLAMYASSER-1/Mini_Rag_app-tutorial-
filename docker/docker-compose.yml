@@ -3,13 +3,18 @@ services:
     image: mongo:8.0.12-noble
     container_name: mongodb
     ports:
-      - "27017:27017"
+      - "27007:27017"
     volumes:
       - ./mongodb:/data/db
+
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - backend
     restart: always
+    user: "1000:1000"
+
 
 networks:
   backend:
-  
