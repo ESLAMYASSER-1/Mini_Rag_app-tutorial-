@@ -17,18 +17,22 @@ class ProcessController(BaseController):
 
     def get_file_loader(self, file_id:str):
         file_ext = self.get_file_extension(file_id)
-
+        file_path = os.path.join(self.project_path,file_id)
+        if not os.path.exists(file_path):
+            return None
         if file_ext == ProcessingEnums.TXT.value:
-            return TextLoader(os.path.join(self.project_path,file_id), encoding="utf-8")
+            return TextLoader(file_path, encoding="utf-8")
     
         if file_ext == ProcessingEnums.PDF.value:
-            return PyMuPDFLoader(os.path.join(self.project_path,file_id))
+            return PyMuPDFLoader(file_path)
         
         return None
     
     def get_file_content(self, file_id:str):
         loader = self.get_file_loader(file_id=file_id)
-        return loader.load()
+        if loader:
+            return loader.load()
+        return None
     
     def process_file_content(self, file_id:str, chunk_size:int =100, overlap_size:int = 20):
         file_content = self.get_file_content(file_id=file_id)
@@ -37,7 +41,8 @@ class ProcessController(BaseController):
             chunk_overlap = overlap_size,
             length_function = len
         )
-
+        if not file_content:
+            return None
         file_content_texts = [
             rec.page_content for rec in file_content
         ]
