@@ -47,13 +47,14 @@ $cd docker
 ### Use docker to run mongo or install it locally
 1) Using Docker 
 - ```bash
-  $ docker compose -f /docker/docker-compose.yml up -d --build
+  $ docker compose -f ./docker/docker-compose.yml up -d --build
   ```
 2) Local Install 
 - Install Mongo From [here](https://www.mongodb.com/docs/manual/installation/)
 
 ## Run FastAPI Server 
 ``` bash 
+$ cd src
 $ uvicorn main:app --reload --host 0.0.0.0 --port 5000
 ```
 
