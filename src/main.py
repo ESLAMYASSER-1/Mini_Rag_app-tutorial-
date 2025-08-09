@@ -4,16 +4,43 @@ import os
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from pymongo import AsyncMongoClient
+from stores import LLMProviderFactory
+from controllers import BaseController
 
 
 load_dotenv('.env')
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.mongo_conn = AsyncMongoClient(os.getenv("MONGODB_URL"))
-    app.db_client = app.mongo_conn[os.getenv("MONGODB_DATABASE")]
+    # On startUP
+    settings = BaseController()
+
+    app.mongo_conn = AsyncMongoClient(settings.MONGODB_URL)
+    app.db_client = app.mongo_conn[settings.MONGODB_DATABASE]
+
+    llm_provider_factory = LLMProviderFactory()
+
+    app.generation_client = llm_provider_factory.create(
+                                                settings.GENERATION_BACKEND
+                                                )
+                                                
+    app.generation_client.set_generation_model(
+                                                settings.GENERATION_MODEL_ID
+                                                )
+
+
+    app.embedding_client = llm_provider_factory.create(
+                                                settings.EMBEDDING_BACKEND
+                                                )
+    
+    app.embedding_client.set_embedding_model(
+                                                settings.EMBEDDING_MODEL_ID,
+                                                settings.EMBEDDING_MODEL_SIZE
+                                                )
+    
 
     yield
+    # On shultdown
     await app.mongo_conn.close()
 
 app = FastAPI(lifespan=lifespan)
