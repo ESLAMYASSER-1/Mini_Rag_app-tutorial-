@@ -11,3 +11,4 @@ pymongo==4.13.2
 bson==0.5.10
 openai==1.99.1
 cohere==5.16.2
+qdrant-client==1.15.1

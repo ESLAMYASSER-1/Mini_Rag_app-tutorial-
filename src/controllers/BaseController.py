@@ -13,6 +13,11 @@ class BaseController:
         self.base_dir = os.path.dirname(os.path.dirname(__file__))
         self.file_dir = os.path.join(self.base_dir, "assets/files")
 
+        self.database_dir = os.path.join(
+            self.base_dir,
+            "assets/database"
+        )
+
         self.MONGODB_URL = os.getenv("MONGODB_URL")
         self.MONGODB_DATABASE = os.getenv("MONGODB_DATABASE")
 
@@ -31,5 +36,22 @@ class BaseController:
         self.GENERATION_DEFAULT_MAX_TOKENS = os.getenv("GENERATION_DEFAULT_MAX_TOKENS")
         self.GENERATION_DEFAULT_TEMPRATURE = os.getenv("GENERATION_DEFAULT_TEMPRATURE")
 
+        self.VECTOR_DB_BACKEND = os.getenv("VECTOR_DB_BACKEND")
+        self.VECTOR_DB_PATH = os.getenv("VECTOR_DB_PATH")
+        self.VECTOR_DB_DISTANCE_METHOD = os.getenv("VECTOR_DB_DISTANCE_METHOD")
+
+
     def generate_random_strings(self, length:int=12):
         return "".join(random.choices(string.ascii_lowercase+string.digits, k=length))
+    
+    def get_database_path(self, db_name:str):
+
+        database_path = os.path.join(
+            self.database_dir,
+            db_name
+        )
+        
+        if not os.path.exists(database_path):
+            os.makedirs(database_path)
+
+        return database_path
